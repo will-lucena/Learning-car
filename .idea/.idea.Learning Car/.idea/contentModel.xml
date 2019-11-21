@@ -7,9 +7,6 @@
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="CSVWriter.cs" t="Include" />
-        <e p="FollowTarget.cs" t="Include" />
-        <e p="Movement.cs" t="Include" />
         <e p="SampleScenes" t="Include">
           <e p="Menu" t="Include">
             <e p="Scripts" t="Include">
@@ -28,6 +25,11 @@
           <e p="Shaders" t="Include">
             <e p="Skybox-Procedural.shader" t="Include" />
           </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="CSVWriter.cs" t="Include" />
+          <e p="DataCollection.cs" t="Include" />
+          <e p="FollowTarget.cs" t="Include" />
         </e>
         <e p="Standard Assets" t="Include">
           <e p="CrossPlatformInput" t="Include">
@@ -99,21 +101,33 @@
               <e p="PriorityParticleAlpha.shader" t="Include" />
             </e>
           </e>
+          <e p="Utility" t="Include">
+            <e p="ActivateTrigger.cs" t="Include" />
+            <e p="AlphaButtonClickMask.cs" t="Include" />
+            <e p="AutoMobileShaderSwitch.cs" t="Include" />
+            <e p="AutoMoveAndRotate.cs" t="Include" />
+            <e p="CameraRefocus.cs" t="Include" />
+            <e p="CurveControlledBob.cs" t="Include" />
+            <e p="DragRigidbody.cs" t="Include" />
+            <e p="DynamicShadowSettings.cs" t="Include" />
+            <e p="EventSystemChecker.cs" t="Include" />
+            <e p="FollowTarget.cs" t="Include" />
+            <e p="ForcedReset.cs" t="Include" />
+            <e p="FOVKick.cs" t="Include" />
+            <e p="FPSCounter.cs" t="Include" />
+            <e p="LerpControlledBob.cs" t="Include" />
+            <e p="ObjectResetter.cs" t="Include" />
+            <e p="ParticleSystemDestroyer.cs" t="Include" />
+            <e p="PlatformSpecificContent.cs" t="Include" />
+            <e p="SimpleActivatorMenu.cs" t="Include" />
+            <e p="SimpleMouseRotator.cs" t="Include" />
+            <e p="SmoothFollow.cs" t="Include" />
+            <e p="TimedObjectActivator.cs" t="Include" />
+            <e p="TimedObjectDestructor.cs" t="Include" />
+            <e p="WaypointCircuit.cs" t="Include" />
+            <e p="WaypointProgressTracker.cs" t="Include" />
+          </e>
           <e p="Vehicles" t="Include">
-            <e p="Aircraft" t="Include">
-              <e p="AircraftGuidelines.txt" t="Include" />
-              <e p="Scripts" t="Include">
-                <e p="AeroplaneAiControl.cs" t="Include" />
-                <e p="AeroplaneAudio.cs" t="Include" />
-                <e p="AeroplaneController.cs" t="Include" />
-                <e p="AeroplaneControlSurfaceAnimator.cs" t="Include" />
-                <e p="AeroplanePropellerAnimator.cs" t="Include" />
-                <e p="AeroplaneUserControl2Axis.cs" t="Include" />
-                <e p="AeroplaneUserControl4Axis.cs" t="Include" />
-                <e p="JetParticleEffect.cs" t="Include" />
-                <e p="LandingGear.cs" t="Include" />
-              </e>
-            </e>
             <e p="Car" t="Include">
               <e p="CarGuidelines.txt" t="Include" />
               <e p="Scripts" t="Include">
