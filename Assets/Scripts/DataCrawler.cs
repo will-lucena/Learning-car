@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataCollection : MonoBehaviour
+public class DataCrawler : MonoBehaviour
 {
     public static Action<List<string>> provideData;
     
@@ -55,7 +55,7 @@ public class DataCollection : MonoBehaviour
         }
 
         string sensorOutput = leftSensor.distance.ToString() + separator + frontSensor.distance + separator +
-                              rightSensor.distance + separator + rb.velocity.magnitude;
+                              rightSensor.distance + separator + transform.rotation.y;
         data.Add(sensorOutput);
         
         if (data.Count >= batchSize)

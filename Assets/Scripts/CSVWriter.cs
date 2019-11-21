@@ -13,13 +13,13 @@ public class CSVWriter : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        DataCollection.provideData += save;
+        DataCrawler.provideData += save;
         separator = (char) requestSeparator?.Invoke();
     }
     
     void save(List<string> data)
     {
-        string header = "sensor-left" + separator + "sensor-front" + separator + "sensor-right" + separator + "speed";
+        string header = "sensor-left" + separator + "sensor-front" + separator + "sensor-right" + separator + "direction";
         data.Insert(0, header);
         string filePath = getPath();
 

@@ -28,7 +28,7 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="CSVWriter.cs" t="Include" />
-          <e p="DataCollection.cs" t="Include" />
+          <e p="DataCrawler.cs" t="Include" />
           <e p="FollowTarget.cs" t="Include" />
         </e>
         <e p="Standard Assets" t="Include">
