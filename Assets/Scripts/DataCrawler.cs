@@ -54,10 +54,14 @@ public class DataCrawler : MonoBehaviour
             Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(Vector3.right) * rightSensor.distance, Color.yellow);
         }
 
-        string sensorOutput = leftSensor.distance.ToString() + separator + frontSensor.distance + separator +
-                              rightSensor.distance + separator + transform.rotation.y;
-        data.Add(sensorOutput);
+        float directionOutput = transform.localEulerAngles.y > 180
+            ? 360 - transform.localEulerAngles.y
+            : transform.localEulerAngles.y;
         
+        string sensorOutput = leftSensor.distance.ToString() + separator + frontSensor.distance + separator +
+                              rightSensor.distance + separator + directionOutput;
+        data.Add(sensorOutput);
+
         if (data.Count >= batchSize)
         {
             provideData?.Invoke(data);

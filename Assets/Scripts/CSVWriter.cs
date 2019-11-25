@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -9,7 +10,7 @@ public class CSVWriter : MonoBehaviour
     public static System.Func<char> requestSeparator;
 
     private char separator;
-    private int filesGenerated = 5;
+    public int filesGenerated = 0;
     // Use this for initialization
     void Start ()
     {
