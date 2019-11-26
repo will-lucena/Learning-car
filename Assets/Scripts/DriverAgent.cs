@@ -11,21 +11,28 @@ public class DriverAgent : Agent
 
     private Rigidbody rb;
     private CarController carController; // the car controller we want to use
-    private float initialDistance;
+    private float maxReward;
+    public Transform sensorOrigin;
+    public float minDistance;
+    
+    private RaycastHit leftSensor;
+    private RaycastHit frontSensor;
+    private RaycastHit rightSensor;
+    private RaycastHit backSensor;
+    private float lastZPosition;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         carController = GetComponent<CarController>();
-        initialDistance = Math.Abs(transform.position.x - target.position.x);
+        collectSensorInput();
+        maxReward = Math.Abs(leftSensor.distance + rightSensor.distance);
+        lastZPosition = transform.position.z;
     }
 
     public override void AgentReset()
     {
-        if (transform.position.y < 0)
-        {
-            transform.position = new Vector3( 0, 0, 0);
-        }
+        transform.position = new Vector3( 0, 0, 0);
     }
 
     public override void CollectObservations()
@@ -46,26 +53,57 @@ public class DriverAgent : Agent
         carController.Move(controlSignal.x, controlSignal.z, controlSignal.z, 0);
         
         // Rewards
-        float distanceToTarget = Vector3.Distance(this.transform.position,
-            target.position);
-
-        // Reached target
-        if (distanceToTarget < 1.42f)
-        {
-            Done();
-        }
+        collectSensorInput();
+        float currentDistance = Math.Abs(leftSensor.distance - rightSensor.distance);
+        
+        //SetReward(maxReward - currentDistance);
 
         // Fell off platform
-        if (transform.position.y < 0)
+
+        if (transform.position.z > lastZPosition)
         {
-            float x1 = transform.position.x;
-            float y1 = transform.position.z;
-            
-            float x2 = target.position.x;
-            float y2 = target.position.z;
-            double distance = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2) * 2);
-            SetReward((float) distance);
+            lastZPosition = transform.position.z;
+            SetReward(5);
+        }
+        else
+        {
+            SetReward(-10);
+        }
+        
+        if (leftSensor.distance <= minDistance || rightSensor.distance <= minDistance || backSensor.distance <= minDistance || frontSensor.distance <= minDistance ) 
+        {
+            SetReward(-maxReward);
             Done();
+        }
+    }
+
+    private void collectSensorInput()
+    {
+        int layerMask = 1 << 8;
+
+        // This would cast rays only against colliders in layer 8.
+        // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
+        layerMask = ~layerMask;
+        
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(sensorOrigin.position, transform.TransformDirection(Vector3.left), out leftSensor, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(Vector3.left) * leftSensor.distance, Color.yellow);
+        }
+        
+        if (Physics.Raycast(sensorOrigin.position, transform.TransformDirection(Vector3.forward), out frontSensor, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(Vector3.forward) * frontSensor.distance, Color.yellow); ;
+        }
+        
+        if (Physics.Raycast(sensorOrigin.position, transform.TransformDirection(Vector3.right), out rightSensor, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(Vector3.right) * rightSensor.distance, Color.yellow);
+        }
+        
+        if (Physics.Raycast(sensorOrigin.position, transform.TransformDirection(Vector3.back), out backSensor, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(Vector3.back) * backSensor.distance, Color.yellow);
         }
     }
 
