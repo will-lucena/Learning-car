@@ -29,7 +29,9 @@
         <e p="Scripts" t="Include">
           <e p="CSVWriter.cs" t="Include" />
           <e p="DataCrawler.cs" t="Include" />
+          <e p="FilenameSO.cs" t="Include" />
           <e p="FollowTarget.cs" t="Include" />
+          <e p="MenuScript.cs" t="Include" />
         </e>
         <e p="Standard Assets" t="Include">
           <e p="CrossPlatformInput" t="Include">
