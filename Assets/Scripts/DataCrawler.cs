@@ -55,7 +55,7 @@ public class DataCrawler : MonoBehaviour
         }
 
         float directionOutput = transform.localEulerAngles.y > 180
-            ? 360 - transform.localEulerAngles.y
+            ? transform.localEulerAngles.y - 360
             : transform.localEulerAngles.y;
         
         string sensorOutput = leftSensor.distance.ToString() + separator + frontSensor.distance + separator +
