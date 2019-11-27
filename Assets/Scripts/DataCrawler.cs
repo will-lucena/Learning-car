@@ -66,10 +66,26 @@ public class DataCrawler : MonoBehaviour
             Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(Vector3.right) * rightSensor.distance, Color.yellow);
         }
 
-        float directionOutput = transform.localEulerAngles.y > 180
+        /*float directionOutput = transform.localEulerAngles.y > 180
             ? transform.localEulerAngles.y - 360
-            : transform.localEulerAngles.y;
+            : transform.localEulerAngles.y;*/
+        float directionOutput = rb.angularVelocity.y;
+
         //Ploting infos in UI
+        if (directionOutput < -0.1)
+        {
+            directionOutput = -1;
+            directionUI.color = sensorLeftUI.color;
+        }else if (directionOutput > 0.1)
+        {
+            directionOutput = 1;
+            directionUI.color = sensorRightUI.color;
+        }
+        else
+        {
+            directionOutput = 0;
+            directionUI.color = new Color(255,255,255);
+        }
         directionUI.text = directionOutput.ToString();
         sensorFrontUI.text = frontSensor.distance.ToString();
         sensorLeftUI.text = leftSensor.distance.ToString();
