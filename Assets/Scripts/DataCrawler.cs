@@ -74,19 +74,22 @@ public class DataCrawler : MonoBehaviour
         //Ploting infos in UI
         if (directionOutput < -0.1)
         {
+            directionUI.text = "<<<";
             directionOutput = -1;
             directionUI.color = sensorLeftUI.color;
         }else if (directionOutput > 0.1)
         {
+            directionUI.text = ">>>";
             directionOutput = 1;
             directionUI.color = sensorRightUI.color;
         }
         else
         {
+            directionUI.text = "^";
             directionOutput = 0;
             directionUI.color = new Color(255,255,255);
         }
-        directionUI.text = directionOutput.ToString();
+        
         sensorFrontUI.text = frontSensor.distance.ToString();
         sensorLeftUI.text = leftSensor.distance.ToString();
         sensorRightUI.text = rightSensor.distance.ToString();
