@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class DataCrawler : MonoBehaviour
 {
@@ -13,6 +15,16 @@ public class DataCrawler : MonoBehaviour
 
     private List<string> data;
     private Rigidbody rb;
+
+    //Ui variables
+    [SerializeField]
+    private TextMeshProUGUI directionUI;
+    [SerializeField]
+    private TextMeshProUGUI sensorLeftUI;
+    [SerializeField]
+    private TextMeshProUGUI sensorRightUI;
+    [SerializeField]
+    private TextMeshProUGUI sensorFrontUI;
 
     private void Awake()
     {
@@ -57,7 +69,12 @@ public class DataCrawler : MonoBehaviour
         float directionOutput = transform.localEulerAngles.y > 180
             ? transform.localEulerAngles.y - 360
             : transform.localEulerAngles.y;
-        
+        //Ploting infos in UI
+        directionUI.text = directionOutput.ToString();
+        sensorFrontUI.text = frontSensor.distance.ToString();
+        sensorLeftUI.text = leftSensor.distance.ToString();
+        sensorRightUI.text = rightSensor.distance.ToString();
+
         string sensorOutput = leftSensor.distance.ToString() + separator + frontSensor.distance + separator +
                               rightSensor.distance + separator + directionOutput;
         data.Add(sensorOutput);
