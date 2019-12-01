@@ -12,4 +12,9 @@ public class MenuScript : MonoBehaviour
     {
         SceneManager.LoadScene("manual");
     }
+    
+    public void goToAutoReverseScene()
+    {
+        SceneManager.LoadScene("reverse");
+    }
 }

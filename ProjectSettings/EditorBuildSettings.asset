@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Manual.unity
     guid: 7bf38260afaa1ff46af08a772b47f8ef
+  - enabled: 1
+    path: Assets/Scenes/Reverse.unity
+    guid: 174690dcc063f42cebdcee395c101713
   m_configObjects: {}
