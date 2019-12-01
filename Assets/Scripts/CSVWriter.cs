@@ -22,7 +22,6 @@ public class CSVWriter : MonoBehaviour
     void save(List<string> data)
     {
         string header = "sensor-left" + separator + "sensor-front" + separator + "sensor-right" + separator + "direction";
-        data.Insert(0, header);
         string filePath = getPath();
 
         StringBuilder sb = new StringBuilder();
