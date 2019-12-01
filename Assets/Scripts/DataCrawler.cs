@@ -15,7 +15,8 @@ public class DataCrawler : MonoBehaviour
 
     private List<string> data;
     private Rigidbody rb;
-
+    [SerializeField] private LineRenderer[] rays;
+    
     //Ui variables
     [SerializeField]
     private TextMeshProUGUI directionUI;
@@ -64,21 +65,31 @@ public class DataCrawler : MonoBehaviour
         RaycastHit leftSensor;
         RaycastHit frontSensor;
         RaycastHit rightSensor;
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(sensorOrigin.position, transform.TransformDirection(Vector3.left), out leftSensor, Mathf.Infinity, layerMask))
-        {
-            Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(Vector3.left) * leftSensor.distance, Color.yellow);
-            
-        }
         
+        Vector3 left = new Vector3(-1, 0, 1);
+        Vector3 right = new Vector3(1, 0, 1);
+        
+        rays[0].SetPosition(0, sensorOrigin.position);
+        rays[1].SetPosition(0, sensorOrigin.position);
+        rays[2].SetPosition(0, sensorOrigin.position);
+        
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(sensorOrigin.position, transform.TransformDirection(left), out leftSensor, Mathf.Infinity, layerMask))
+        {
+            Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(left) * leftSensor.distance, Color.yellow);
+            rays[0].SetPosition(1, leftSensor.point);
+        }
+
         if (Physics.Raycast(sensorOrigin.position, transform.TransformDirection(Vector3.forward), out frontSensor, Mathf.Infinity, layerMask))
         {
             Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(Vector3.forward) * frontSensor.distance, Color.yellow); ;
+            rays[1].SetPosition(1, frontSensor.point);
         }
         
-        if (Physics.Raycast(sensorOrigin.position, transform.TransformDirection(Vector3.right), out rightSensor, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(sensorOrigin.position, transform.TransformDirection(right), out rightSensor, Mathf.Infinity, layerMask))
         {
-            Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(Vector3.right) * rightSensor.distance, Color.yellow);
+            Debug.DrawRay(sensorOrigin.position, transform.TransformDirection(right) * rightSensor.distance, Color.yellow);
+            rays[2].SetPosition(1, rightSensor.point);
         }
 
         /*float directionOutput = transform.localEulerAngles.y > 180
