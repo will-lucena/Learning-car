@@ -12,4 +12,12 @@ public class MenuScript : MonoBehaviour
     {
         SceneManager.LoadScene("manual");
     }
+    public void goToQuit()
+    {
+        Application.Quit();
+    }
+    public void restartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
